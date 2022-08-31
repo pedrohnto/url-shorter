@@ -10,8 +10,27 @@ exports.post = async (req, res, next) => {
   }
   res.status(201).send();
 };
+
 exports.get = async (req, res, next) => {
   let url = await service.getUrl(req.params.path);
+  if (url) {
+    res.status(200).send(url.url);
+  } else {
+    res.status(404).send("Url doesnt exists");
+  }
+};
+
+exports.getById = async (req, res, next) => {
+  let url = await service.getUrlById(req.params.id);
+  if (url) {
+    res.status(200).send(url.url);
+  } else {
+    res.status(404).send("Url doesnt exists");
+  }
+};
+
+exports.getByDate = async (req, res, next) => {
+  let url = await service.getUrlByDate(req.params.creationDate);
   if (url) {
     res.status(200).send(url.url);
   } else {

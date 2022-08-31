@@ -4,6 +4,7 @@ async function saveUrl(urlString) {
   var urlToSave = {
     url: urlString,
     short: generateShortHash(),
+    creationDate: new Date(),
   };
   var result = await repository.saveUrl(urlToSave);
   return result ? urlToSave : null;
@@ -11,6 +12,12 @@ async function saveUrl(urlString) {
 
 async function getUrl(shortPath) {
   return await repository.getUrl(shortPath);
+}
+async function getUrlById(shortPath) {
+  return await repository.getUrlById(shortPath);
+}
+async function getUrlByDate(shortPath) {
+  return await repository.getUrlByDate(shortPath);
 }
 
 function generateShortHash() {
@@ -27,4 +34,6 @@ function generateShortHash() {
 module.exports = {
   saveUrl: saveUrl,
   getUrl: getUrl,
+  getUrlById: getUrlById,
+  getUrlByDate: getUrlByDate,
 };
